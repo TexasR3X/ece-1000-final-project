@@ -4,7 +4,7 @@ This project illistrates how one can build a remote control car using Arduino.
 
 ## Credits
 
-The circuit layout and code for this project was developed by Lee Curiosity (under CC0 / Unlicense), but it has been adapted by Austin Dalley.
+The circuit layout and code for this project was developed by Lee Curiosity (not licensed), but it has been adapted by Austin Dalley.
 
 The following files were created by Lee Curiosity (but later were renamed and modified by Austin Dalley).
 - `arduino/chassis.stl`
