@@ -25,7 +25,7 @@ void loop() {
     if (irrecv.decode(&results)) {
         //Press UP Button 
         if (results.value==0xFF629D) {
-          Forward();
+            Forward();
         }
         //Press Down Button
         else if (results.value==0xFFA857) { 
@@ -46,8 +46,8 @@ void loop() {
         irrecv.resume();
     }
 }
-   
- 
+
+
 void Backward() {
     digitalWrite(in1,HIGH);
     digitalWrite(in2,LOW);
