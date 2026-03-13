@@ -1,5 +1,5 @@
 {
-  "name": "rc-car-0",
+  "name": "ece-1000-final-project",
   "version": "1.0.0",
   "description": "",
   "license": "ISC",
@@ -10,7 +10,13 @@
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "dependencies": {
+    "path": "^0.12.7"
+  },
   "devDependencies": {
-    "electron": "^40.6.0"
+    "electron": "^41.0.2"
+  },
+  "overrides": {
+    "yauzl": "^3.2.1"
   }
 }
