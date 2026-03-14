@@ -10,9 +10,6 @@
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "path": "^0.12.7"
-  },
   "devDependencies": {
     "electron": "^41.0.2"
   },
