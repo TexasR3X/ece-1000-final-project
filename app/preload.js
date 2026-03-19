@@ -1,14 +1,18 @@
 const { contextBridge, ipcRenderer } = require("electron");
 
-contextBridge.exposeInMainWorld("backendAPI", {
+contextBridge.exposeInMainWorld("backendApi", {
     /**
      * Prints to console on the backend.
-     * @param  {...any} args 
+     * @param {...any} args 
      * @returns void
      */
     log(...args) {
         ipcRenderer.send("log", ...args);
     },
+    /**
+     * Tell the backend to connect to the car.
+     */
+    connectToCar() {},
     /**
      * Gets car's current drive state from the backend.
      * @returns string
