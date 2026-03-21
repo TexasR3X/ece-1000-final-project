@@ -12,7 +12,9 @@ contextBridge.exposeInMainWorld("backendApi", {
     /**
      * Tell the backend to connect to the car.
      */
-    connectToCar() {},
+    connectToCar() {
+        this.log("FRONTEND: Connecting to car.");
+    },
     /**
      * Gets car's current drive state from the backend.
      * @returns string
