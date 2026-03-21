@@ -12,7 +12,7 @@ function createWindow() {
     });
 
     // Create and open the window
-    window.loadFile(path.join(__dirname, "frontend", "index.html"));
+    window.loadFile(path.join(__dirname, "frontend", "dist", "index.html"));
 
     // Open the Chrome developer tools in the window
     window.webContents.openDevTools();
