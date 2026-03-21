@@ -1,6 +1,6 @@
 const { contextBridge, ipcRenderer } = require("electron");
 
-contextBridge.exposeInMainWorld("backendApi", {
+contextBridge.exposeInMainWorld("backendContextBridge", {
     /**
      * Prints to console on the backend.
      * @param {...any} args 
