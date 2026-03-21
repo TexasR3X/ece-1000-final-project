@@ -26,5 +26,7 @@ contextBridge.exposeInMainWorld("backendContextBridge", {
      * Sets the car's current drive state on the backend.
      * @param {string} driveState 
      */
-    setDriveState(driveState) {}
+    setDriveState(driveState) {
+        this.log(`FRONTEND: Changing state to ${driveState}.`);
+    }
 });
