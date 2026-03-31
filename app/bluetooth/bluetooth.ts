@@ -1,3 +1,5 @@
+// Code mostly pulled from the documentation
+
 import noble from "@stoprocent/noble";
 
 export async function runBluetooth() {
