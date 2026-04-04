@@ -19,8 +19,5 @@
   },
   "overrides": {
     "yauzl": "^3.2.1"
-  },
-  "dependencies": {
-    "@stoprocent/noble": "^2.3.17"
   }
 }
