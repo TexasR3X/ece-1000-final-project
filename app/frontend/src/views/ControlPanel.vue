@@ -7,7 +7,7 @@
         <div class="grid-container">
             <!-- Top Row -->
             <div class="empty-grid-cell"></div>
-            <button class="up-btn" @click="backendService.setDriveState(`UP`)">Up</button>
+            <button class="forward-btn" @click="backendService.setDriveState(`FORWARD`)">Forward</button>
             <div class="empty-grid-cell"></div>
             <!-- Middle Row -->
             <button class="left-btn" @click="backendService.setDriveState(`LEFT`)">Left</button>
@@ -15,7 +15,7 @@
             <button class="right-btn" @click="backendService.setDriveState(`RIGHT`)">Right</button>
             <!-- Bottom Row -->
             <div class="empty-grid-cell"></div>
-            <button class="down-btn" @click="backendService.setDriveState(`DOWN`)">Down</button>
+            <button class="backward-btn" @click="backendService.setDriveState(`BACKWARD`)">Backward</button>
             <div class="empty-grid-cell"></div>
         </div>
     </div>
