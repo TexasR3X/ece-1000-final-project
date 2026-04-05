@@ -1,0 +1,28 @@
+# General Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+venv/
+.env/
+.venv/
+
+# Distribution and Packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Testing and Coverage
+.coverage
+.coverage.*
+htmlcov/
+
+# Type Checkers
+.mypy_cache/
+.pytest_cache/
+
+# OS
+.DS_Store
+Thumbs.db
