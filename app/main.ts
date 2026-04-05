@@ -1,10 +1,7 @@
 import { app, BrowserWindow, ipcMain } from "electron";
-import path from "path";
-import { runBluetooth } from "./bluetooth/bluetooth.js";
-
-// Define the root directory for the project to run in
-// NOTE: The project runs out of "./dist/", but files like "preload.js" and "frontend/" are in this directory
-const rootDir: string = path.join(import.meta.dirname, "..");
+import { connectToCar } from "./src/bluetooth.js";
+import getPath from "./src/getPath.js";
+import makeErrorMessageReadable from "./src/makeErrorMessageReadable.js"
 
 // Define how to create a new window for the app
 function createWindow() {
@@ -12,12 +9,12 @@ function createWindow() {
         width: 800,
         height: 600,
         webPreferences: {
-            preload: path.join(rootDir, "preload.js")
+            preload: getPath("preload.js")
         }
     });
 
     // Create and open the window
-    window.loadFile(path.join(rootDir, "frontend", "dist", "index.html"));
+    window.loadFile(getPath("frontend", "dist", "index.html"));
 
     // Open the Chrome developer tools in the window
     window.webContents.openDevTools();
@@ -25,12 +22,24 @@ function createWindow() {
 
 // Create a new window when the app opens
 app.whenReady().then(() => {
-    ipcMain.on("log", (_: any, ...args: any[]) => console.log(...args));
+    ipcMain.handle("frontend-backend--log", (_, ...args: any[]) => console.log(...args));
+    ipcMain.handle("frontend-backend--connect-to-car", async () => {
+        try {
+            const pythonProcess = await connectToCar();
+
+            return null;
+        }
+        catch (error) {
+            const errorMessage = makeErrorMessageReadable((error as any).toString());
+
+            console.error(`ERROR: ${errorMessage}`)
+
+            return errorMessage;
+        }
+    });
 
     createWindow();
 });
 
 // Quite the app when every window closes (for every OS)
 app.on("window-all-closed", app.quit);
-
-runBluetooth().catch(console.error);

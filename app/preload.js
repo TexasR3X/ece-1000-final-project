@@ -3,8 +3,7 @@ const { contextBridge, ipcRenderer } = require("electron");
 contextBridge.exposeInMainWorld("backendContextBridge", {
     /**
      * Prints to console on the backend.
-     * @param {...any} args 
-     * @returns void
+     * @param {...any} args
      */
     log(...args) {
         return ipcRenderer.invoke("frontend-backend--log", ...args);
