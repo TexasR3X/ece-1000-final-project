@@ -41,5 +41,5 @@
     "moduleDetection": "force",
     "skipLibCheck": true,
   },
-  "include": ["main.ts", "bluetooth"]
+  "include": ["main.ts", "src"]
 }
