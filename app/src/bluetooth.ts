@@ -1,5 +1,6 @@
 import { spawn, type ChildProcessWithoutNullStreams } from "node:child_process";
 import getPath from "./getPath.js";
+import { registerProcessForCleanup } from "./cleanupResources.js";
 
 /**
  * Attempt to connect to the car.
@@ -14,6 +15,9 @@ export function connectToCar(): Promise<ChildProcessWithoutNullStreams> {
             const pythonProcess = spawn(pathToPythonExecutable, ["-m", "src.bluetooth.main"], {
                 cwd: getPath("bluetooth")
             });
+
+            // Make is so the python process can be disposed of properly
+            registerProcessForCleanup(pythonProcess);
 
             // Declare a variable to hold the stdout from Python
             let pythonStdout = "";

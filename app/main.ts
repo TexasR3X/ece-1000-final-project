@@ -2,6 +2,7 @@ import { app, BrowserWindow, ipcMain } from "electron";
 import { connectToCar } from "./src/bluetooth.js";
 import getPath from "./src/getPath.js";
 import makeErrorMessageReadable from "./src/makeErrorMessageReadable.js"
+import { subscribeMainProcessToCleanupEvents } from "./src/cleanupResources.js";
 
 // Define how to create a new window for the app
 function createWindow() {
@@ -43,3 +44,6 @@ app.whenReady().then(() => {
 
 // Quite the app when every window closes (for every OS)
 app.on("window-all-closed", app.quit);
+
+// Ensure that the python subprocess is properly cleaned up when the main process ends
+subscribeMainProcessToCleanupEvents();
