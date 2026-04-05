@@ -7,13 +7,14 @@ contextBridge.exposeInMainWorld("backendContextBridge", {
      * @returns void
      */
     log(...args) {
-        ipcRenderer.send("log", ...args);
+        return ipcRenderer.invoke("frontend-backend--log", ...args);
     },
     /**
-     * Tell the backend to connect to the car.
+     * Have the backend attempt to connect to the car.
      */
     connectToCar() {
         this.log("FRONTEND: Connecting to car.");
+        return ipcRenderer.invoke("frontend-backend--connect-to-car");
     },
     /**
      * Gets car's current drive state from the backend.
