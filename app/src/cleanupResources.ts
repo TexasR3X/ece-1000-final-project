@@ -7,12 +7,7 @@ export function registerProcessForCleanup(subprocess: ChildProcessWithoutNullStr
 }
 
 function cleanupResources() {
-    console.log("Cleaning up...");
-
-    subprocesses.forEach(subprocess => {
-        console.log("subprocess.pid:", subprocess.pid);
-        subprocess.kill("SIGTERM");
-    });
+    subprocesses.forEach(subprocess => subprocess.kill("SIGTERM"));
 }
 
 export function subscribeMainProcessToCleanupEvents() {
