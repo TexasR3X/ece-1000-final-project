@@ -75,3 +75,12 @@ export function connectToCar(): Promise<ChildProcessWithoutNullStreams> {
         }
     });
 }
+
+export function changeDriveState(pythonProcess: ChildProcessWithoutNullStreams, newDriveState: string) {
+    const jsonMessage = {
+        message_type: "node-python--set-drive-state",
+        message_data: newDriveState
+    };
+
+    pythonProcess.stdin.write(JSON.stringify(jsonMessage));
+}

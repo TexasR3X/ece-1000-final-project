@@ -1,5 +1,5 @@
 import { app, BrowserWindow, ipcMain } from "electron";
-import { connectToCar } from "./src/bluetooth.js";
+import { connectToCar, changeDriveState } from "./src/bluetooth.js";
 import getPath from "./src/getPath.js";
 import makeErrorMessageReadable from "./src/makeErrorMessageReadable.js"
 import { subscribeMainProcessToCleanupEvents } from "./src/cleanupResources.js";
@@ -26,14 +26,21 @@ app.whenReady().then(() => {
     ipcMain.handle("frontend-backend--log", (_, ...args: any[]) => console.log(...args));
     ipcMain.handle("frontend-backend--connect-to-car", async () => {
         try {
+            // Connect to the car, and get a reference to the python process that is connected to it
             const pythonProcess = await connectToCar();
 
+            // Add an event listener to change the drive state through the python process
+            ipcMain.handle("frontend-backend--change-drive-state", (_, newDriveState: string) => {
+                changeDriveState(pythonProcess, newDriveState);
+            });
+
+            // Return an error message of null
             return null;
         }
         catch (error) {
             const errorMessage = makeErrorMessageReadable((error as any).toString());
 
-            console.error(`ERROR: ${errorMessage}`)
+            console.error(`ERROR: ${errorMessage}`);
 
             return errorMessage;
         }
