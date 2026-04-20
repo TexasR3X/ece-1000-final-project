@@ -1,6 +1,6 @@
 import json
 
-def send_specific_message(message_type: str, data: str | None = None):
+def send_stdout_message(message_type: str, data: str | None = None):
     json_message = {
         "message_type": message_type,
         "message_data": data
@@ -9,7 +9,13 @@ def send_specific_message(message_type: str, data: str | None = None):
     print(json.dumps(json_message), flush=True)
 
 def log_message(message: str):
-    send_specific_message("python-node--log", message)
+    send_stdout_message("python-node--log", message)
+
+# def parse_stdin(stdin: str) -> dict:
+#     return json.loads(stdin)
+
+
+
 
 
 # def parse_stdin(line):
