@@ -1,8 +1,8 @@
 # Events Used in This Project:
 
-## Events from Python to Node, via standard output:
-- `python-node--log`
-- `python-node--connected-to-car`
-- `python-node--car-not-found`
-- `python-node--bluetooth-off`
-- `python-node--unknown-error`
+## Events from the **bluetooth** subprocess to the **main** process, via standard output:
+- `bluetooth-main--log`
+- `bluetooth-main--connected-to-car`
+- `bluetooth-main--car-not-found`
+- `bluetooth-main--bluetooth-off`
+- `bluetooth-main--unknown-error`
