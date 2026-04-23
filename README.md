@@ -1,6 +1,6 @@
 # ECE 1000 &mdash; Final Project
 
-This project illistrates how one can build a remote control car using Arduino, and then control the car using either a remote or a desktop app.
+This project illustrates how one can build a remote control car using Arduino and then control the car using either a remote or a desktop app. It should be noted that this app is still a working progress however, and unfortunately the app portion of this project isn't operational.
 
 ## Project Structure
 
@@ -17,4 +17,4 @@ The software of the project is broken up into four major parts, each part runnin
 
 This project was based on a different [project](https://projecthub.arduino.cc/lee_curiosity/a-beginners-guide-controlling-an-arduino-car-with-a-remote-5d4418) developed by Lee Curiosity. While my project has had signifcant changes made to it, the circuit design and Arduino sketch were orginally developed by him.
 
-The `INO` files in `arduino/` were based on Curiosity's orginal work but were altered. The `arduino/chassis.stl` and `arduino/chassis.3mf` files were entirely his design.
+The `INO` files in `arduino/` were based on Curiosity's orginal work but were altered. The `arduino/chassicModels/chassis.stl` and `arduino/chassicModels/chassis.3mf` files were entirely his design.
