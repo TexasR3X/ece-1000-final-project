@@ -1,7 +1,6 @@
 // Note: Portions of this sketch were based on the work of Lee Curiosity
 //   - See https://projecthub.arduino.cc/lee_curiosity/a-beginners-guide-controlling-an-arduino-car-with-a-remote-5d4418 for Curiosity's original work
 
-// #include <ArduinoBLE.h>
 #include <IRremote.h>
 
 // Right Motor Pins
