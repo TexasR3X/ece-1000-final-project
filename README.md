@@ -1,14 +1,20 @@
 # ECE 1000 &mdash; Final Project
 
-This project illistrates how one can build a remote control car using Arduino.
+This project illistrates how one can build a remote control car using Arduino, and then control the car using either a remote or a desktop app.
+
+## Project Structure
+
+The software of the project is broken up into four major parts, each part running as a seperate process.
+
+| Process Name      | Location         | Language   | Runs On |
+| ----------------- | ---------------- | ---------- | ------- |
+| Arduino Process   | `arduino/`       | C++        | Arduino |
+| Main Process      | `app/`           | TypeScript | App     |
+| Frontend Process  | `app/frontend/`  | TypeScript | App     |
+| Bluetooth Process | `app/bluetooth/` | Python     | App     |
 
 ## Credits
 
-The circuit layout and code for this project was developed by Lee Curiosity (not licensed), but it has been adapted by Austin Dalley.
+This project was based on a different [project](https://projecthub.arduino.cc/lee_curiosity/a-beginners-guide-controlling-an-arduino-car-with-a-remote-5d4418) orginally developed by Lee Curiosity. While my project has had signifcant changes made to it, the circuit design and Arduino sketch were orginally developed by him.
 
-The following files were created by Lee Curiosity (but later were renamed and modified by Austin Dalley).
-- `arduino/chassis.stl`
-- `arduino/irSensorSetUp.ino`
-- `arduino/motorControls.ino`
-
-See the [orginal project](https://projecthub.arduino.cc/lee_curiosity/a-beginners-guide-controlling-an-arduino-car-with-a-remote-5d4418)'s source code and project instructions.
+The `INO` files in `arduino/` were based on Curiosity's orginal work. The `arduino/chassis.stl` and `arduino/chassis.3mf` files were entirely his design.
