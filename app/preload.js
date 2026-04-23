@@ -28,5 +28,6 @@ contextBridge.exposeInMainWorld("backendContextBridge", {
      */
     setDriveState(driveState) {
         this.log(`FRONTEND: Changing state to ${driveState}.`);
+        return ipcRenderer.invoke("frontend-backend--change-drive-state");
     }
 });
