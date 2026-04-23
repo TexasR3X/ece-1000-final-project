@@ -17,4 +17,4 @@ The software of the project is broken up into four major parts, each part runnin
 
 This project was based on a different [project](https://projecthub.arduino.cc/lee_curiosity/a-beginners-guide-controlling-an-arduino-car-with-a-remote-5d4418) developed by Lee Curiosity. While my project has had signifcant changes made to it, the circuit design and Arduino sketch were orginally developed by him.
 
-The `INO` files in `arduino/` were based on Curiosity's orginal work. The `arduino/chassis.stl` and `arduino/chassis.3mf` files were entirely his design.
+The `INO` files in `arduino/` were based on Curiosity's orginal work, but were altered. The `arduino/chassis.stl` and `arduino/chassis.3mf` files were entirely his design.
