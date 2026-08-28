@@ -2,7 +2,7 @@ import asyncio
 from bleak import BleakScanner, BleakClient
 from bleak.exc import BleakBluetoothNotAvailableError
 from bleak.backends.service import BleakGATTService
-from bluetooth.main_process_api import send_stdout_message, log_message
+from .main_process_api import send_stdout_message, log_message
 import sys
 import json
 
