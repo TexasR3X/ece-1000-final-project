@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import router from "@/router";
-    import backendService from "@/services/backendService";
+    import mainProcessService from "@/services/mainProcessService";
     import { ref } from "vue";
 
     // Set up the inital look of the error message and button
@@ -16,7 +16,7 @@
             btnText.value = "Connecting...";
 
             // Attempt to connect to the car
-            const errorMessage: string = await backendService.connectToCar();
+            const errorMessage: string = await mainProcessService.connectToCar();
 
             if (errorMessage) {
                 // Display the error message, and format the button properly
