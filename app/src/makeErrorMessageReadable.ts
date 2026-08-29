@@ -7,9 +7,9 @@ export default function makeErrorMessageReadable(errorMessage: string): string {
 
     // Map the error event name to the user readable message
     switch (errorMessage) {
-        case "python-node--car-not-found":
+        case "bluetooth-main--car-not-found":
             return "The car couldn't be found. Make sure the car is turned on."
-        case "python-node--bluetooth-off":
+        case "bluetooth-main--bluetooth-off":
             return "Your bluetooth is off. Please turn it on."
         default:
             // If no match is detected, assume its already readable to the user
