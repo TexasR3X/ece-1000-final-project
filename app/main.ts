@@ -24,8 +24,9 @@ function createWindow() {
 
 // Create a new window when the app opens
 app.whenReady().then(() => {
-    ipcMain.handle("frontend-backend--log", (_, ...args: any[]) => console.log(...args));
-    ipcMain.handle("frontend-backend--connect-to-car", async () => {
+    ipcMain.handle("frontend-main--log", (_, ...args: any[]) => console.log("FRONTEND:", ...args));
+
+    ipcMain.handle("frontend-main--connect-to-car", async () => {
         try {
             // Create the bluetooth subprocess
             const bluetoothSubprocess = new BluetoothSubprocess();
