@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import datetime
 import json
 
 def send_stdout_message(message_type: str, message_data: str | None = None):
@@ -12,9 +12,9 @@ def send_stdout_message(message_type: str, message_data: str | None = None):
 def log_message(message: str):
     # Log the message to a log file
     with open("bluetooth.log", "a") as file:
-        date_str = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+        time = datetime.now().strftime("%H:%M:%S")
 
-        file.write(f"\n[{date_str}]\n{message}\n")
+        file.write(f"\n[{time}]\n{message}\n")
 
     # Send the message to the main process
     send_stdout_message("bluetooth-main--log", message)
