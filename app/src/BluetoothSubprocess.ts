@@ -1,7 +1,7 @@
 import { spawn, type ChildProcessWithoutNullStreams } from "node:child_process";
 import getPath from "./getPath.js";
 
-const allSubprocesses: ChildProcessWithoutNullStreams[] = [];
+export const allSubprocesses: ChildProcessWithoutNullStreams[] = [];
 
 interface StdioMessageObject {
     message_type: string;

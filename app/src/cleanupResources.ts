@@ -1,13 +1,7 @@
-import type { ChildProcessWithoutNullStreams } from "node:child_process";
-
-const subprocesses: ChildProcessWithoutNullStreams[] = [];
-
-export function registerProcessForCleanup(subprocess: ChildProcessWithoutNullStreams) {
-    subprocesses.push(subprocess);
-}
+import { allSubprocesses } from "./BluetoothSubprocess.js";
 
 function cleanupResources() {
-    subprocesses.forEach(subprocess => subprocess.kill("SIGTERM"));
+    allSubprocesses.forEach(subprocess => subprocess.kill("SIGTERM"));
 }
 
 export function subscribeMainProcessToCleanupEvents() {
