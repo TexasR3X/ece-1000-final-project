@@ -8,7 +8,7 @@ interface StdioMessageObject {
     message_data: string;
 }
 
-export default class BluetoothSubprocess {
+export class BluetoothSubprocess {
     public subprocess: ChildProcessWithoutNullStreams;
 
     public constructor() {
@@ -24,7 +24,10 @@ export default class BluetoothSubprocess {
         // Add the process to the array of all subprocesses
         allSubprocesses.push(pythonSubprocess);
 
-        // Return the process
+        // Subscribe to the "error" event on the subprocess
+        pythonSubprocess.on("error", error => console.error("MAIN (ERROR):", error));
+
+        // Store a reference to this process
         this.subprocess = pythonSubprocess;
     }
 
@@ -37,17 +40,6 @@ export default class BluetoothSubprocess {
 
         // Send the message to the stdin
         this.subprocess.stdin.write(JSON.stringify(stdinObject));
-
-        /*
-        function changeDriveState(pythonProcess: ChildProcessWithoutNullStreams, newDriveState: string) {
-            const jsonMessage = {
-                message_type: "node-python--set-drive-state",
-                message_data: newDriveState
-            };
-
-            pythonProcess.stdin.write(JSON.stringify(jsonMessage));
-        }
-        */
     }
 
     public waitForStdout(): Promise<StdioMessageObject> {
@@ -76,7 +68,7 @@ export default class BluetoothSubprocess {
 
                                 if (stdoutObject.message_type == "bluetooth-main--log") {
                                     // Log the message from the subprocess, and keep listening for stdout
-                                    console.log(`BLUETOOTH: ${stdoutObject.message_data}`);
+                                    console.log("BLUETOOTH:", stdoutObject.message_data);
                                 }
                                 else {
                                     // Stop listening for stdout, and return the message object
@@ -110,44 +102,14 @@ export default class BluetoothSubprocess {
         this.sendStdin("main-bluetooth--connect-to-car");
 
         // Wait for conformation of the subprocess's connection
+        return await this.waitForStdout();
+    }
+
+    public async changeDriveState(newDriveState: string) {
+        // Send a message to the bluetooth subprocess, asking it to change the drive state
+        this.sendStdin("main-bluetooth--change-drive-state", newDriveState);
+
+        // Wait for conformation of the update from the subprocess
         await this.waitForStdout();
     }
 }
-
-
-
-// class SubprocessService {
-//     public createSubprocess(): ChildProcessWithoutNullStreams {
-//         // Get the paths to the python executable and python root folder
-//         const pathToPythonExecutable = getPath("bluetooth", ".venv", "bin", "python");
-//         const pathToPythonProjectRoot = getPath("bluetooth");
-
-//         // Create the python process that will connect with the car, via bluetooth
-//         const pythonSubprocess = spawn(pathToPythonExecutable, ["-m", "src.bluetooth.main"], {
-//             cwd: pathToPythonProjectRoot
-//         });
-
-//         // Add the process to the array of all subprocesses
-//         allSubprocesses.push(pythonSubprocess);
-
-//         // Return the process
-//         return pythonSubprocess;
-//     }
-
-//     public 
-
-//     public subscribeMainProcessToCleanupEvents() {
-//         // Declare an event handler to handle cleaning up subprocesses
-//         function cleanupSubprocesses() {
-//             allSubprocesses.forEach(subprocess => subprocess.kill("SIGTERM"));
-//         }
-        
-//         // Register the main process use the event handler above
-//         process.on("exit", cleanupSubprocesses);
-//         process.on("SIGINT", cleanupSubprocesses);
-//         process.on("SIGTERM", cleanupSubprocesses);
-//         process.on("uncaughtException", cleanupSubprocesses);
-//     }
-// }
-
-// export const subprocessService = new SubprocessService();
