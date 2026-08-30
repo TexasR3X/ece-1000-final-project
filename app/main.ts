@@ -1,9 +1,8 @@
 import { app, BrowserWindow, ipcMain } from "electron";
-import { connectToCar, changeDriveState } from "./src/bluetooth.js";
 import getPath from "./src/getPath.js";
 import makeErrorMessageReadable from "./src/makeErrorMessageReadable.js"
 import { subscribeMainProcessToCleanupEvents } from "./src/cleanupResources.js";
-import BluetoothSubprocess from "./src/BluetoothSubprocess.js";
+import { BluetoothSubprocess } from "./src/BluetoothSubprocess.js";
 
 // Define how to create a new window for the app
 function createWindow() {
@@ -31,31 +30,28 @@ app.whenReady().then(() => {
             // Create the bluetooth subprocess
             const bluetoothSubprocess = new BluetoothSubprocess();
 
-            bluetoothSubprocess.connectToCar();
+            const stdioResponse = await bluetoothSubprocess.connectToCar();
 
-            ipcMain.handle("frontend-backend--change-drive-state", (_, newDriveState: string) => {
+            console.log("MAIN: stdioResponse:", stdioResponse);
 
-            });
+            if (stdioResponse.message_type === "bluetooth-main--connected-to-car") {
+                ipcMain.handle("frontend-main--change-drive-state", async (_, newDriveState: string) => {
+                    console.log("MAIN: newDriveState:", newDriveState);
 
+                    await bluetoothSubprocess.changeDriveState(newDriveState);
+                });
+            }
+            else {
+                throw new Error(stdioResponse.message_type);
+            }
 
-
-
-
-            // // Connect to the car, and get a reference to the python process that is connected to it
-            // const pythonProcess = await connectToCar();
-
-            // // Add an event listener to change the drive state through the python process
-            // ipcMain.handle("frontend-backend--change-drive-state", (_, newDriveState: string) => {
-            //     changeDriveState(pythonProcess, newDriveState);
-            // });
-
-            // // Return an error message of null
-            // return null;
+            // Return an error message of null
+            return null;
         }
         catch (error) {
             const errorMessage = makeErrorMessageReadable((error as any).toString());
 
-            console.error(`ERROR: ${errorMessage}`);
+            console.error("MAIN (ERROR):", errorMessage);
 
             return errorMessage;
         }
